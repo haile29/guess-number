@@ -28,23 +28,16 @@ document.querySelector(".check").addEventListener("click", function () {
       highscore = score;
       document.querySelector('.highscore').textContent = highscore;
     }
-  } else if (guessNumber > secretNumber) {
+    //when players got it wrong
+  } else if (guessNumber !== secretNumber) {
     //score now is still higher than 1
     if (score > 1) {
-      document.querySelector(".message").textContent = "Lower than that!";
+      document.querySelector(".message").textContent = 
+        guessNumber > secretNumber ? "Lower than that!" : "Higher than that!";
       score--;
       document.querySelector(".score").textContent = score;
     } else {
       //score is lower than 1, so we need to end the game
-      document.querySelector(".message").textContent = "You lost. Try again!";
-      document.querySelector(".score").textContent = 0;
-    }
-  } else if (guessNumber < secretNumber) {
-    if (score > 1) {
-      document.querySelector(".message").textContent = "Higher than that!";
-      score--;
-      document.querySelector(".score").textContent = score;
-    } else {
       document.querySelector(".message").textContent = "You lost. Try again!";
       document.querySelector(".score").textContent = 0;
     }
