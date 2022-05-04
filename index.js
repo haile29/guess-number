@@ -6,6 +6,11 @@ let score = 20;
 
 //Storing highscore variable
 let highscore = 0;
+//functions
+
+function displayMessage(message) {
+  document.querySelector(".message").textContent = message;
+}
 
 //Adding event listener to the button as users click the "Check" button
 document.querySelector(".check").addEventListener("click", function () {
@@ -13,11 +18,10 @@ document.querySelector(".check").addEventListener("click", function () {
   const guessNumber = Number(document.querySelector(".guess").value);
   // if users didn't guess the number
   if (!guessNumber) {
-    document.querySelector(".message").textContent = "Please input a number!";
+    displayMessage("Please enter a number");
     // if users guess the correct number
   } else if (guessNumber === secretNumber) {
-    document.querySelector(".message").textContent =
-      "Congrats! You got the correct number 🎉";
+    displayMessage("Congrats! You got the correct number 🎉");
     //displaying the secret number when players win
     document.querySelector(".number").textContent = secretNumber;
     //changing CSS styles when players win
@@ -26,35 +30,36 @@ document.querySelector(".check").addEventListener("click", function () {
     //implementing highscore
     if (score > highscore) {
       highscore = score;
-      document.querySelector('.highscore').textContent = highscore;
+      document.querySelector(".highscore").textContent = highscore;
     }
-    //when players got it wrong
   } else if (guessNumber !== secretNumber) {
     //score now is still higher than 1
     if (score > 1) {
-      document.querySelector(".message").textContent = 
-        guessNumber > secretNumber ? "Lower than that!" : "Higher than that!";
+      displayMessage(
+        guessNumber > secretNumber ? "Lower than that!" : "Higher than that!"
+      );
       score--;
       document.querySelector(".score").textContent = score;
     } else {
       //score is lower than 1, so we need to end the game
-      document.querySelector(".message").textContent = "You lost. Try again!";
+      displayMessage("You lost! Try again!");
       document.querySelector(".score").textContent = 0;
     }
   }
 });
 
-//Adding event listener to the "Reset" button as users click 
+//Adding event listener to the "Reset" button as users click
 
-document.querySelector('.again').addEventListener('click', function () {
-    document.querySelector('.message').textContent = 'Start';
-    document.querySelector('.score').textContent = score;
-    document.querySelector('.number').textContent = '?';
-    document.querySelector('.number').style.width = '15rem';
-    document.querySelector('body').style.backgroundColor = '#222';
-    document.querySelector('.guess').value = '';
+document.querySelector(".again").addEventListener("click", function () {
+  score = 20;
+  secretNumber = Math.trunc(Math.random() * 20 + 1);
+  displayMessage("Start");
+  document.querySelector(".score").textContent = score;
+  document.querySelector(".number").textContent = "?";
+  document.querySelector(".number").style.width = "15rem";
+  document.querySelector("body").style.backgroundColor = "#222";
+  document.querySelector(".guess").value = "";
 });
-
 
 
 
